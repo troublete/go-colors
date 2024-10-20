@@ -17,17 +17,27 @@ func Test_RGBtoXYZ(t *testing.T) {
 				Z: 0.02951184150536878,
 			},
 		},
+		{
+			NewRGB(1, 1, 1),
+			XYZ{
+				X: 0.0002884932920536636,
+				Y: 0.0003035270139015359,
+				Z: 0.00033048928549748075,
+			},
+		},
 	} {
-		v := tc.rgb.ToXYZ()
-		if v.X != tc.xyz.X {
-			t.Errorf("X: expected %v, got %v", tc.xyz.X, v.X)
-		}
-		if v.Y != tc.xyz.Y {
-			t.Errorf("Y: expected %v, got %v", tc.xyz.Y, v.Y)
-		}
-		if v.Z != tc.xyz.Z {
-			t.Errorf("Z: expected %v, got %v", tc.xyz.Z, v.Z)
-		}
+		t.Run(tc.rgb.String(), func(t *testing.T) {
+			v := tc.rgb.ToXYZ()
+			if v.X != tc.xyz.X {
+				t.Errorf("X: expected %v, got %v", tc.xyz.X, v.X)
+			}
+			if v.Y != tc.xyz.Y {
+				t.Errorf("Y: expected %v, got %v", tc.xyz.Y, v.Y)
+			}
+			if v.Z != tc.xyz.Z {
+				t.Errorf("Z: expected %v, got %v", tc.xyz.Z, v.Z)
+			}
+		})
 	}
 }
 
@@ -70,6 +80,14 @@ func Test_XYZtoLAB(t *testing.T) {
 				L: 48.82584210219513,
 				A: -12.077647436082472,
 				B: 51.69162385420878,
+			},
+		},
+		{
+			NewRGB(1, 1, 1),
+			LAB{
+				L: 0.27408489355308907,
+				A: -0.00000011814002554011438,
+				B: 0.00000004725601021604575,
 			},
 		},
 	} {

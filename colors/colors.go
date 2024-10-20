@@ -140,8 +140,7 @@ func (xyz XYZ) ToLAB() LAB {
 
 	f := func(x float64) float64 {
 		if x < (216.0 / 24389.0) {
-			return (7.787 * x) + (16 / 116)
-			//return 1.0 / 116.0 * ((24389.0/27.0)*x + 16.0)
+			return ((24389/27)*x + 16) / 116
 		} else {
 			return math.Cbrt(x)
 		}
