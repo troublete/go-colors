@@ -7,10 +7,12 @@ This provides some 'every-day' color calculation and conversions that allows eas
 handling. 
 
 * convert HEX to sRGB
+* convert sRGB to HEX
 * convert sRGB to XYZ
 * convert sRGB to HSL
 * convert XYZ to L*a*b*
 * calculate distance (delta E) between two L*a*b* colors
+* calculate WCAG contrast ratio between to sRGB colors
 
 **Example**
 ```go
@@ -48,3 +50,8 @@ This CLI accepts three parameters (R, G, B) and convert them to a ready-to-use H
 ### rgb-to-hex
 
 This CLI accepts three parameters (R, G, B) and converts them to a ready-to-use HEX color code.
+
+
+### wcag-contrast-check
+
+This CLI accepts two HEX color codes and returns the WCAG contrast ratio + if it succeeds the required 7:1 ratio.
