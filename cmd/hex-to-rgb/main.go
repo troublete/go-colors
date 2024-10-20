@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/troublete/color-distance-cli/colors"
+	"github.com/troublete/go-colors/colors"
 )
 
 func main() {

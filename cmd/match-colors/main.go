@@ -12,7 +12,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/troublete/color-distance-cli/colors"
+	"github.com/troublete/go-colors/colors"
 )
 
 type ColorValue struct {
