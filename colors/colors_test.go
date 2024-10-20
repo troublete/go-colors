@@ -293,3 +293,63 @@ func Test_RGBToHex(t *testing.T) {
 		t.Errorf("expected '#2d3f4e', got '%v'", rgb.ToHex())
 	}
 }
+
+func Test_RGB_WACGRelativeLuminance(t *testing.T) {
+	for _, tc := range []struct {
+		rgb RGB
+		lum float64
+	}{
+		{
+			rgb: NewRGB(255, 255, 255),
+			lum: 1.0,
+		},
+		{
+			rgb: NewRGB(52, 223, 69),
+			lum: 0.5393508786771503,
+		},
+		{
+			rgb: NewRGB(0, 0, 0),
+			lum: 0.0,
+		},
+	} {
+		t.Run(tc.rgb.String(), func(t *testing.T) {
+			if tc.rgb.WACGRelativeLuminance() != tc.lum {
+				t.Errorf("expected %v, got %v", tc.lum, tc.rgb.WACGRelativeLuminance())
+			}
+		})
+	}
+}
+
+func Test_RGB_WACGContrastRatioTo(t *testing.T) {
+	for _, tc := range []struct {
+		a     RGB
+		b     RGB
+		ratio float64
+		good  bool
+	}{
+		{
+			a:     NewRGB(255, 230, 109),
+			b:     NewRGB(34, 34, 34),
+			ratio: 12.72158650562626,
+			good:  true,
+		},
+
+		{
+			a:     NewRGB(90, 113, 109),
+			b:     NewRGB(34, 34, 34),
+			ratio: 3.043813461215191,
+			good:  false,
+		},
+	} {
+		t.Run(tc.a.String()+tc.b.String(), func(t *testing.T) {
+			ratio, good := tc.a.WACGContrastRatioTo(tc.b)
+			if good != tc.good {
+				t.Error("expected passing")
+			}
+
+			if ratio != tc.ratio {
+				t.Errorf("expected %v, got %v", tc.ratio, ratio)
+			}
+		})
+	}
+}

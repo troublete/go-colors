@@ -76,6 +76,25 @@ func (rgb RGB) ToHSL() HSL {
 	}
 }
 
+func (rgb RGB) WACGRelativeLuminance() float64 {
+	l := func(x float64) float64 {
+		if x <= 0.03928 {
+			return x / 12.92
+		} else {
+			return math.Pow((x+0.055)/1.055, 2.4)
+		}
+	}
+
+	return 0.2126*l(rgb.R) + 0.7152*l(rgb.G) + 0.0722*l(rgb.B)
+}
+
+func (a RGB) WACGContrastRatioTo(b RGB) (float64, bool) {
+	aLum := a.WACGRelativeLuminance()
+	bLum := b.WACGRelativeLuminance()
+	ratio := (math.Max(aLum, bLum) + 0.05) / (math.Min(aLum, bLum) + 0.05)
+	return ratio, ratio >= 7.0
+}
+
 func NewRGB(r, g, b float64) RGB {
 	return RGB{
 		R: r / 255.0,
