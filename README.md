@@ -1,6 +1,8 @@
 # go-colors
 > color calculations and conversions for every-day use
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/troublete/go-colors/colors.svg)](https://pkg.go.dev/github.com/troublete/go-colors/colors)
+
 ## Introduction
 
 This provides some 'every-day' color calculation and conversions that allows easier color discovery, matching and
