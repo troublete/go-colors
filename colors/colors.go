@@ -3,6 +3,7 @@ package colors
 import (
 	"bytes"
 	"fmt"
+	"image/color"
 	"math"
 	"strconv"
 	"strings"
@@ -20,6 +21,15 @@ func (rgb RGB) String() string {
 
 func (rgb RGB) ToHex() string {
 	return fmt.Sprintf("#%x%x%x", int(rgb.R*255), int(rgb.G*255), int(rgb.B*255))
+}
+
+func (rgb RGB) ToColor() color.RGBA {
+	return color.RGBA{
+		R: uint8(rgb.R * 255),
+		G: uint8(rgb.G * 255),
+		B: uint8(rgb.B * 255),
+		A: 1,
+	}
 }
 
 func (rgb RGB) linearize() (r, g, b float64) {

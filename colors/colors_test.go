@@ -353,3 +353,11 @@ func Test_RGB_WACGContrastRatioTo(t *testing.T) {
 		})
 	}
 }
+
+func Test_RGBToColor(t *testing.T) {
+	rgb := NewRGB(140, 234, 23)
+	rgba := rgb.ToColor()
+	if rgba.R != 140 || rgba.G != 234 || rgba.B != 23 {
+		t.Errorf("RGB to RGBA conversion failed")
+	}
+}
